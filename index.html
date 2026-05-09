@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Sistem Input Pendaftaran Mahasiswa Baru - UTS Pemrograman Web II Universitas Pamulang">
+    <title>Marwan Kosasih | UNPAM</title>
+
+    <!-- Google Fonts: Inter untuk tampilan modern dan profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome untuk ikon-ikon UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- File CSS terpisah -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <!-- Navbar dengan efek glassmorphism, jam realtime, dan dark mode toggle -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-brand">
+            <i class="fas fa-graduation-cap"></i>
+            <span>SIPMA<strong>UNPAM</strong></span>
+        </div>
+        <div class="navbar-info">
+            <!-- Jam dan tanggal realtime -->
+            <div class="navbar-clock" id="navbarClock">
+                <i class="fas fa-clock"></i>
+                <span id="realtimeClock">--:--:--</span>
+            </div>
+            <div class="navbar-date" id="navbarDate">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="realtimeDate">-- --- ----</span>
+            </div>
+            <!-- Toggle Dark Mode -->
+            <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon" id="darkModeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTAINER ==================== -->
+    <main class="main-container">
+
+        <!-- ==================== HEADER ==================== -->
+        <!-- Header dengan judul aplikasi dan informasi institusi -->
+        <header class="app-header" id="appHeader">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Sistem Input Pendaftaran Mahasiswa Baru</h1>
+                    <p>UTS Pemrograman Web II &mdash; Universitas Pamulang</p>
+                </div>
+            </div>
+            <div class="header-decoration">
+                <div class="deco-circle deco-1"></div>
+                <div class="deco-circle deco-2"></div>
+                <div class="deco-circle deco-3"></div>
+            </div>
+        </header>
+
+        <!-- ==================== STATISTIK CARDS ==================== -->
+        <!-- Kartu statistik yang menampilkan data real-time -->
+        <section class="stats-section" id="statsSection">
+            <div class="stat-card" id="statTotal">
+                <div class="stat-icon stat-icon-total">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalPendaftar">0</span>
+                    <span class="stat-label">Total Pendaftar</span>
+                </div>
+            </div>
+            <div class="stat-card" id="statLulus">
+                <div class="stat-icon stat-icon-lulus">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalLulus">0</span>
+                    <span class="stat-label">Lulus</span>
+                </div>
+            </div>
+            <div class="stat-card" id="statCadangan">
+                <div class="stat-icon stat-icon-cadangan">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalCadangan">0</span>
+                    <span class="stat-label">Cadangan</span>
+                </div>
+            </div>
+            <div class="stat-card" id="statTidakLulus">
+                <div class="stat-icon stat-icon-gagal">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalTidakLulus">0</span>
+                    <span class="stat-label">Tidak Lulus</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FORM INPUT PENDAFTARAN ==================== -->
+        <!-- Form dengan validasi untuk input data mahasiswa baru -->
+        <section class="form-section" id="formSection">
+            <div class="section-header">
+                <h2><i class="fas fa-edit"></i> Form Input Pendaftaran</h2>
+                <p>Silakan isi data pendaftaran mahasiswa baru dengan lengkap</p>
+            </div>
+
+            <form id="formPendaftaran" novalidate>
+                <div class="form-grid">
+                    <!-- Jumlah Input Data -->
+                    <div class="form-group">
+                        <label for="jumlahInput"><i class="fas fa-sort-numeric-up"></i> Jumlah Input Data</label>
+                        <input type="number" id="jumlahInput" name="jumlahInput" placeholder="Contoh: 1" min="1"
+                            required>
+                        <span class="error-msg" id="errJumlahInput"></span>
+                    </div>
+
+                    <!-- Kode Pendaftaran -->
+                    <div class="form-group">
+                        <label for="kodePendaftaran"><i class="fas fa-barcode"></i> Kode Pendaftaran</label>
+                        <input type="text" id="kodePendaftaran" name="kodePendaftaran" placeholder="Contoh: A2-101-9"
+                            required>
+                        <span class="error-msg" id="errKodePendaftaran"></span>
+                    </div>
+
+                    <!-- Nama Pendaftar -->
+                    <div class="form-group full-width">
+                        <label for="namaPendaftar"><i class="fas fa-user"></i> Nama Pendaftar</label>
+                        <input type="text" id="namaPendaftar" name="namaPendaftar" placeholder="Masukkan nama lengkap"
+                            required>
+                        <span class="error-msg" id="errNamaPendaftar"></span>
+                    </div>
+
+                    <!-- Jenis Kelamin -->
+                    <div class="form-group">
+                        <label><i class="fas fa-venus-mars"></i> Jenis Kelamin</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="jenisKelamin" value="Laki-laki" required>
+                                <span class="radio-custom"></span>
+                                <span>Laki-laki</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="jenisKelamin" value="Perempuan">
+                                <span class="radio-custom"></span>
+                                <span>Perempuan</span>
+                            </label>
+                        </div>
+                        <span class="error-msg" id="errJenisKelamin"></span>
+                    </div>
+
+                    <!-- Tempat Lahir -->
+                    <div class="form-group">
+                        <label for="tempatLahir"><i class="fas fa-map-marker-alt"></i> Tempat Lahir</label>
+                        <input type="text" id="tempatLahir" name="tempatLahir" placeholder="Contoh: Tangerang" required>
+                        <span class="error-msg" id="errTempatLahir"></span>
+                    </div>
+
+                    <!-- Tanggal Lahir -->
+                    <div class="form-group">
+                        <label for="tanggalLahir"><i class="fas fa-calendar-day"></i> Tanggal Lahir</label>
+                        <input type="date" id="tanggalLahir" name="tanggalLahir" required>
+                        <span class="error-msg" id="errTanggalLahir"></span>
+                    </div>
+
+                    <!-- Asal Sekolah -->
+                    <div class="form-group">
+                        <label for="asalSekolah"><i class="fas fa-school"></i> Asal Sekolah</label>
+                        <input type="text" id="asalSekolah" name="asalSekolah" placeholder="Contoh: SMAN 1 Tangerang"
+                            required>
+                        <span class="error-msg" id="errAsalSekolah"></span>
+                    </div>
+
+                    <!-- Pekerjaan Orang Tua -->
+                    <div class="form-group">
+                        <label for="pekerjaanOrtu"><i class="fas fa-briefcase"></i> Pekerjaan Orang Tua</label>
+                        <select id="pekerjaanOrtu" name="pekerjaanOrtu" required>
+                            <option value="">-- Pilih Pekerjaan --</option>
+                            <option value="PNS">PNS</option>
+                            <option value="TNI/Polri">TNI/Polri</option>
+                            <option value="Wiraswasta">Wiraswasta</option>
+                            <option value="Karyawan Swasta">Karyawan Swasta</option>
+                            <option value="Petani">Petani</option>
+                            <option value="Nelayan">Nelayan</option>
+                            <option value="Pedagang">Pedagang</option>
+                            <option value="Buruh">Buruh</option>
+                            <option value="Pensiunan">Pensiunan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                        <span class="error-msg" id="errPekerjaanOrtu"></span>
+                    </div>
+
+                    <!-- Separator untuk Nilai Ujian -->
+                    <div class="form-separator full-width">
+                        <span><i class="fas fa-file-alt"></i> Nilai Ujian Masuk</span>
+                    </div>
+
+                    <!-- Nilai Matematika -->
+                    <div class="form-group">
+                        <label for="nilaiMat"><i class="fas fa-calculator"></i> Nilai Matematika</label>
+                        <input type="number" id="nilaiMat" name="nilaiMat" placeholder="0 - 100" min="0" max="100"
+                            required>
+                        <span class="error-msg" id="errNilaiMat"></span>
+                    </div>
+
+                    <!-- Nilai Bahasa Inggris -->
+                    <div class="form-group">
+                        <label for="nilaiIng"><i class="fas fa-language"></i> Nilai Bahasa Inggris</label>
+                        <input type="number" id="nilaiIng" name="nilaiIng" placeholder="0 - 100" min="0" max="100"
+                            required>
+                        <span class="error-msg" id="errNilaiIng"></span>
+                    </div>
+
+                    <!-- Nilai Pengetahuan Umum -->
+                    <div class="form-group">
+                        <label for="nilaiUmum"><i class="fas fa-globe"></i> Nilai Pengetahuan Umum</label>
+                        <input type="number" id="nilaiUmum" name="nilaiUmum" placeholder="0 - 100" min="0" max="100"
+                            required>
+                        <span class="error-msg" id="errNilaiUmum"></span>
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-simpan" id="btnSimpan">
+                        <i class="fas fa-save"></i> Simpan Data
+                    </button>
+                    <button type="reset" class="btn btn-reset" id="btnReset">
+                        <i class="fas fa-undo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ==================== TABEL DATA PENDAFTARAN ==================== -->
+        <!-- Tabel data dengan search bar dan tombol cetak/export -->
+        <section class="table-section" id="tableSection">
+            <div class="section-header">
+                <h2><i class="fas fa-table"></i> Data Pendaftaran Mahasiswa Baru</h2>
+                <p>Daftar seluruh data pendaftar yang telah diinput</p>
+            </div>
+
+            <!-- Toolbar: Search bar dan tombol cetak -->
+            <div class="table-toolbar">
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari berdasarkan Nama atau Kode Pendaftaran..."
+                        aria-label="Cari data pendaftar">
+                </div>
+                <div class="toolbar-actions">
+                    <button class="btn btn-print" id="btnPrint" title="Cetak / Export PDF">
+                        <i class="fas fa-print"></i> Cetak / PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kontainer tabel yang bisa di-scroll secara horizontal -->
+            <div class="table-container">
+                <table id="tabelData">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Pendaftaran</th>
+                            <th>Nama</th>
+                            <th>JK</th>
+                            <th>Tempat, Tgl Lahir</th>
+                            <th>Asal Sekolah</th>
+                            <th>Pekerjaan Ortu</th>
+                            <th>Tempat Tes</th>
+                            <th>Bulan Tes</th>
+                            <th>Mat</th>
+                            <th>Ing</th>
+                            <th>Umum</th>
+                            <th>Rata-rata</th>
+                            <th>Keterangan</th>
+                            <th class="no-print">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelBody">
+                        <!-- Data akan di-render oleh JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- Pesan jika tabel kosong -->
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-inbox"></i>
+                    <p>Belum ada data pendaftaran.</p>
+                    <span>Silakan isi form di atas untuk menambahkan data.</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="app-footer" id="appFooter">
+        <div class="footer-content">
+            <div class="footer-left">
+                <i class="fas fa-graduation-cap"></i>
+                <span>&copy; 2026 Sistem Pendaftaran Mahasiswa Baru</span>
+            </div>
+            <div class="footer-right">
+                <span>UTS Pemrograman Web II &mdash; Universitas Pamulang</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <!-- Kontainer untuk notifikasi toast kustom -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- File JavaScript terpisah -->
+    <script src="script.js"></script>
+</body>
+
+</html>
